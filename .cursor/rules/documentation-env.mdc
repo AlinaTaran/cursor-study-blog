@@ -1,0 +1,28 @@
+---
+description: Branding, README sync, and environment templates
+alwaysApply: false
+---
+
+# Documentation & Environment
+
+Apply when changing setup steps, env vars, or README files.
+
+## Branding
+
+Use **StudySprint** / `studysprint` everywhere. Replace legacy `quickblog` references when touched.
+
+## README Sync
+
+Update together: `README.md`, `server/README.md`, `client/README.md`.
+
+## Env Templates
+
+- `server/.env.example` — DB URI, `PORT`, `CLIENT_URL`, `JWT_SECRET`, optional `GEMINI_API_KEY`
+- `client/.env.example` — `VITE_BASE_URL`
+- Keep aligned with `docker-compose.yml` and seed fixtures
+- Placeholders only — never real secrets
+
+## Do Not
+
+- Create new markdown docs unless requested
+- Put credentials in Cursor rules or `AGENTS.md`

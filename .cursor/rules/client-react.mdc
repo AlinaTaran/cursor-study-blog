@@ -1,0 +1,42 @@
+---
+description: React frontend patterns, Ant Design, and hooks conventions
+globs: client/src/**/*.{js,jsx}
+alwaysApply: false
+---
+
+# Client React
+
+## Structure
+
+One folder per component: `Component.jsx`, `Component.css`, `index.js` barrel.
+
+- Import via `@/` alias and barrels (`@/components`, `@/hooks`, `@/pages`, `@/api`)
+
+## Data Fetching
+
+1. Hooks in `client/src/hooks/api/` (`useApiQuery`, `useApiMutation`)
+2. API modules: `blogApi`, `adminApi`, `commentApi`
+3. No raw `axios` in page components
+
+Migrate away from `AppContext` for new features — use hooks.
+
+## Ant Design
+
+Sole UI library: `antd` + `@ant-design/icons`.
+
+- Prefer existing components (`Table`, `Form`, `Modal`, `Card`, `Layout`) over custom UI
+- Theme tokens from `client/src/App.jsx` — use `theme.useToken()`, not hardcoded colors
+- Toasts: `react-hot-toast`; everything else: Ant Design
+- Sanitize HTML with DOMPurify; edit rich text with Quill
+
+## Constants & i18n
+
+- Routes: `client/src/constants/routes.js`
+- API paths: `client/src/constants/apiEndpoints.js`
+- User strings: `client/src/i18n/locales/en.json` via `useTranslation()`
+
+## Do Not
+
+- Add MUI, Chakra, shadcn, or other UI libraries
+- Add `console.log` in committed code
+- Introduce Redux/Zustand — use existing hooks layer
