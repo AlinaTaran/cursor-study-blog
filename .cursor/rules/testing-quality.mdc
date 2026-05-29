@@ -1,0 +1,23 @@
+---
+description: Testing and code quality standards
+globs: "**/*.{test,spec}.{js,jsx},client/**,server/**"
+alwaysApply: false
+---
+
+# Testing & Quality
+
+No test harness yet. When adding tests:
+
+| Area | Tool |
+|------|------|
+| Client | Vitest + React Testing Library |
+| Server | Vitest + supertest; mock Mongoose in unit tests |
+
+Test hooks and API modules before page snapshots.
+
+Run `npm run lint` in `client/` after frontend changes.
+
+## Do Not
+
+- Add trivial or mock-only tests
+- Add a test runner without `package.json` scripts

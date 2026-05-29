@@ -1,0 +1,39 @@
+---
+description: Client/server API contract — canonical routes and response shape
+globs: client/src/api/**,client/src/constants/apiEndpoints.js,client/src/hooks/api/**,server/src/routes/**
+alwaysApply: false
+---
+
+# API Contracts
+
+Source of truth: `server/src/routes/`. Update server route + `apiEndpoints.js` + matching `*Api.js` / hook in one change.
+
+## Routes
+
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/api/blog/all` | Published blogs |
+| GET | `/api/blog/:blogId` | Blog detail |
+| POST | `/api/blog/add-comment` | `{ blog, name, content }` |
+| POST | `/api/blog/comments` | `{ blogId }` |
+| POST | `/api/blog/add` | multipart: `blog` JSON + `image` |
+| POST | `/api/blog/delete` | `{ id }` |
+| POST | `/api/blog/publish` / `/unpublish` | `{ id }` |
+| POST | `/api/blog/generate` | `{ prompt }` |
+| POST | `/api/admin/login` | `{ email, password }` |
+| GET | `/api/admin/dashboard` | not `/stats` |
+| GET | `/api/admin/blogs` / `/comments` | |
+| POST | `/api/admin/approve-comment` / `/unapprove-comment` / `/delete-comment` | `{ id }` |
+| GET | `/uploads/blogs/:filename` | Static images |
+
+## Response
+
+```javascript
+{ success: true, count?, blogs?, comments?, message?, token? }
+{ success: false, message: string }
+```
+
+## Do Not
+
+- Use PUT/DELETE on client without a matching server route
+- Change an endpoint on one side only
