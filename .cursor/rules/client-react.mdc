@@ -24,7 +24,7 @@ Migrate away from `AppContext` for new features — use hooks.
 
 Sole UI library: `antd` + `@ant-design/icons`.
 
-- Prefer existing components (`Table`, `Form`, `Modal`, `Card`, `Layout`) over custom UI
+- Prefer Ant Design components over custom markup; follow patterns in existing `client/src/components/` and `client/src/pages/`
 - Theme tokens from `client/src/App.jsx` — use `theme.useToken()`, not hardcoded colors
 - Toasts: `react-hot-toast`; everything else: Ant Design
 - Sanitize HTML with DOMPurify; edit rich text with Quill
