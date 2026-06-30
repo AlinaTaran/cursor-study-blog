@@ -1,0 +1,36 @@
+---
+description: Client/server API contract — canonical routes and response shape
+globs: client/src/api/**,client/src/constants/apiEndpoints.js,client/src/hooks/api/**,server/src/routes/**
+alwaysApply: false
+---
+
+# API Contracts
+
+Source of truth: `server/src/routes/`. Update server route + `apiEndpoints.js` + matching `*Api.js` / hook in one change.
+
+## Routes
+
+Canonical paths live in:
+
+- `server/src/routes/blogRoutes.js` and `adminRoutes.js`
+- `client/src/constants/apiEndpoints.js`
+- `client/src/api/blogApi.js`, `adminApi.js`, `commentApi.js`
+
+When adding or changing an endpoint, update server route + `apiEndpoints.js` + matching API module/hook in one change.
+
+**Gotchas (stable, not a full route list):**
+
+- Mutations use **POST** on the server — do not assume REST PUT/DELETE without a matching route.
+- Admin stats: server exposes `GET /api/admin/dashboard` — not `/api/admin/stats` (see stale `ADMIN_STATS` in `apiEndpoints.js`).
+
+## Response
+
+```javascript
+{ success: true, count?, blogs?, comments?, message?, token? }
+{ success: false, message: string }
+```
+
+## Do Not
+
+- Use PUT/DELETE on client without a matching server route
+- Change an endpoint on one side only

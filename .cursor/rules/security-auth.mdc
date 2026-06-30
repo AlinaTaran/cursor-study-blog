@@ -1,0 +1,31 @@
+---
+description: Security patterns for auth, input handling, and secrets
+alwaysApply: false
+---
+
+# Security
+
+Apply when working on auth, admin routes, or user input.
+
+## Auth
+
+- Client: JWT in `localStorage`, Bearer header via `client/src/api/axiosConfig.js`
+- Server: JWT in `adminController.js`, verified by `server/src/middleware/auth.js`
+- Admin guard is client-side only — server does not enforce role checks yet
+
+## Input
+
+- DOMPurify on rendered HTML (client)
+- Validators in `server/src/validators/` (server)
+- Preserve rate limiters on login, comments, and AI endpoints
+
+## Secrets
+
+- Never commit `.env` files
+- No passwords or tokens in source code or Cursor rules
+- Credentials belong in `.env.example` / README only
+
+## Do Not
+
+- Assume server enforces admin role
+- Remove Helmet, CORS, or rate limiters without replacement

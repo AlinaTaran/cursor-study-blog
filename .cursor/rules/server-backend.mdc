@@ -1,0 +1,35 @@
+---
+description: Express 5 backend MVC patterns and conventions
+globs: server/**/*.js
+alwaysApply: false
+---
+
+# Server Backend
+
+## Architecture
+
+`routes/` → `controllers/` → `models/` with `validators/`, `middleware/`, `helpers/`, `constants/`.
+
+No services layer unless refactoring is explicitly requested.
+
+## Controllers
+
+- Wrap async handlers with `server/src/helpers/asyncHandler.js`
+- Use `sendSuccess` / `sendError` / `sendData` from `server/src/helpers/response.js`
+- Use `server/src/constants/messages.js` for message strings
+- Validation in `server/src/validators/` — not duplicated in controllers
+
+## Routes
+
+- Static paths (`/all`) before params (`/:blogId`)
+- Public routes before `router.use(auth)`
+- Mutations use POST — do not switch to REST verbs without updating client
+
+## Middleware order in `server.js`
+
+CORS → Helmet → body parser → rate limit → static uploads → logging → routes → 404 → error handler
+
+## Do Not
+
+- Return JSON without `success: boolean`
+- Rename env vars without updating `.env.example`, `docker-compose.yml`, and `init-scripts/` together
