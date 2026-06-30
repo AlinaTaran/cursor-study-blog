@@ -13,9 +13,7 @@ Rules live in `.cursor/rules/`. Key points:
 
 ## Quick Start
 
-```bash
-cd server && cp .env.example .env && npm install && npm run setup && npm run server
-cd client && cp .env.example .env && npm install && npm run dev
+ample .env && npm install && npm run dev
 ```
 
 See README files for credentials and seed data.
